@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:5000
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjQzNzNkNjE4NTE2ZGNjNDAzZmNmZCIsImlhdCI6MTc4NTMxNDU5MSwiZXhwIjoxNzg1NDAwOTkxfQ.z4T9DU7X034nKTT_hV1Dc_v52WYDUhWNZop15eVTgmg
+
+### Fetch all notes (to get a real note _id to update)
+GET {{baseUrl}}/api/notes/fetchallnotes
+auth-token: {{authToken}}
+
+### Update a note (only works if authToken belongs to the note's owner)
+PUT {{baseUrl}}/api/notes/updatenote/6a64374e618516dcc403fcfe
+Content-Type: application/json
+auth-token: {{authToken}}
+
+{
+  "title": "Updated Title",
+  "description": "Updated description text22",
+  "tag": "Work"
+}

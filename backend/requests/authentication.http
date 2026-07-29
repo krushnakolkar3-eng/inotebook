@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:5000
+
+### Create a new User
+POST {{baseUrl}}/api/auth/createuser
+Content-Type: application/json
+
+{
+  "name": "Krushna3 Patil1",
+   "email": "krushna13111rr4e3d11ww12@example.com",
+  "password": "mypassword12311ww12"
+}
+
+### Login User
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+   "email": "krushna13111rr4e3d11ww12@example.com",
+  "password": "mypassword12311ww12"
+}
+
