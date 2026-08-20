@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
   "name": "Krushna3 Patil1",
-   "email": "krushna13111rr4e3d11ww12@example.com",
+  "email": "krushna13111rr4e3d11ww12@example.com",
   "password": "mypassword12311ww12"
 }
 
@@ -16,7 +16,26 @@ POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
 {
-   "email": "krushna13111rr4e3d11ww12@example.com",
+  "email": "krushna13111rr4e3d11ww12@example.com",
   "password": "mypassword12311ww12"
 }
 
+### Get logged-in user details (uses token from login response above)
+POST {{baseUrl}}/api/auth/getuser
+Content-Type: application/json
+auth-token: {{login.response.body.authtoken}}
+
+### Fetch all notes
+GET {{baseUrl}}/api/notes/fetchallnotes
+auth-token: {{login.response.body.authtoken}}
+
+### Add a new note
+POST {{baseUrl}}/api/notes/addnote
+Content-Type: application/json
+auth-token: {{login.response.body.authtoken}}
+
+{
+  "title": "My First Note",
+  "description": "This is a test note",
+  "tag": "Personal"
+}

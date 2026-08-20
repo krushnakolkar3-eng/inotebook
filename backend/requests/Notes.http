@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjQzNzNkNjE4NTE2ZGNjNDAzZmNmZCIsImlhdCI6MTc4NTMxNDU5MSwiZXhwIjoxNzg1NDAwOTkxfQ.z4T9DU7X034nKTT_hV1Dc_v52WYDUhWNZop15eVTgmg
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNjQzNzNkNjE4NTE2ZGNjNDAzZmNmZCIsImlhdCI6MTc4NTg2MjA3NSwiZXhwIjoxNzg1OTQ4NDc1fQ.X6wQ0hm06OUq8qJZNOgSlQyLkF-zwbcxg5M476537LU
 
 ### Fetch all notes (to get a real note _id to update)
 GET {{baseUrl}}/api/notes/fetchallnotes
