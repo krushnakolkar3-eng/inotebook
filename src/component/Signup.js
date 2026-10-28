@@ -8,8 +8,11 @@ const Signup = (props) => {
         password: "",
         cpassword: "",
     });
+
     const history = useHistory();
-    const host = "http://localhost:5000";
+
+    // Deployed Render backend URL
+    const host = "https://inotebook-backend-3194.onrender.com";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,36 +22,65 @@ const Signup = (props) => {
             return;
         }
 
-        const response = await fetch(`${host}/api/auth/createuser`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: credentials.name,
-                email: credentials.email,
-                password: credentials.password,
-            }),
-        });
-        const json = await response.json();
+        try {
+            const response = await fetch(
+                `${host}/api/auth/createuser`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: credentials.name,
+                        email: credentials.email,
+                        password: credentials.password,
+                    }),
+                }
+            );
 
-        if (json.authtoken) {
-            localStorage.setItem('token', json.authtoken);
-            props.showAlert("Account created successfully", "success");
-            history.push("/");
-        } else {
-            props.showAlert(json.error || "Failed to create account", "danger");
+            const json = await response.json();
+
+            if (response.ok && json.authtoken) {
+                localStorage.setItem('token', json.authtoken);
+                props.showAlert(
+                    "Account created successfully",
+                    "success"
+                );
+                history.push("/");
+            } else {
+                props.showAlert(
+                    json.error || json.errors?.[0]?.msg ||
+                    "Failed to create account",
+                    "danger"
+                );
+            }
+        } catch (error) {
+            console.error("Signup error:", error);
+            props.showAlert(
+                "Unable to connect to the server. Please try again.",
+                "danger"
+            );
         }
     };
 
     const onChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
+        setCredentials({
+            ...credentials,
+            [e.target.name]: e.target.value,
+        });
     };
 
     return (
         <div className="container">
-            <h2 className="my-3">Create an account to use iNotebook</h2>
+            <h2 className="my-3">
+                Create an account to use iNotebook
+            </h2>
+
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
+                    <label htmlFor="name" className="form-label">
+                        Name
+                    </label>
                     <input
                         type="text"
                         className="form-control"
@@ -60,8 +92,11 @@ const Signup = (props) => {
                         required
                     />
                 </div>
+
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
+                    <label htmlFor="email" className="form-label">
+                        Email address
+                    </label>
                     <input
                         type="email"
                         className="form-control"
@@ -72,8 +107,11 @@ const Signup = (props) => {
                         required
                     />
                 </div>
+
                 <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
+                    <label htmlFor="password" className="form-label">
+                        Password
+                    </label>
                     <input
                         type="password"
                         className="form-control"
@@ -82,11 +120,15 @@ const Signup = (props) => {
                         value={credentials.password}
                         onChange={onChange}
                         minLength={5}
+                        autoComplete="new-password"
                         required
                     />
                 </div>
+
                 <div className="mb-3">
-                    <label htmlFor="cpassword" className="form-label">Confirm Password</label>
+                    <label htmlFor="cpassword" className="form-label">
+                        Confirm Password
+                    </label>
                     <input
                         type="password"
                         className="form-control"
@@ -95,10 +137,14 @@ const Signup = (props) => {
                         value={credentials.cpassword}
                         onChange={onChange}
                         minLength={5}
+                        autoComplete="new-password"
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Sign up</button>
+
+                <button type="submit" className="btn btn-primary">
+                    Sign up
+                </button>
             </form>
         </div>
     );

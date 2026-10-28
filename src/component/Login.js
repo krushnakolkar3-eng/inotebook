@@ -5,7 +5,7 @@ const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const host = "http://localhost:5000";
+    const host = "https://inotebook-backend-3194.onrender.com";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
