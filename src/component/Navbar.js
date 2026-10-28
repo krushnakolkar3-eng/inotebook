@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const location = useLocation();
     const isLoggedIn = !!localStorage.getItem('token');
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/login');
+        history.push('/login');
     };
 
     return (

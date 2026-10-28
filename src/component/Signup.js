@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Signup = (props) => {
     const [credentials, setCredentials] = useState({
@@ -8,7 +8,7 @@ const Signup = (props) => {
         password: "",
         cpassword: "",
     });
-    const navigate = useNavigate();
+    const history = useHistory();
     const host = "http://localhost:5000";
 
     const handleSubmit = async (e) => {
@@ -33,7 +33,7 @@ const Signup = (props) => {
         if (json.authtoken) {
             localStorage.setItem('token', json.authtoken);
             props.showAlert("Account created successfully", "success");
-            navigate("/");
+            history.push("/");
         } else {
             props.showAlert(json.error || "Failed to create account", "danger");
         }

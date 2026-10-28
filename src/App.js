@@ -7,7 +7,7 @@ import Alert from './component/Alert';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -28,12 +28,12 @@ function App() {
         <Navbar />
         <div className="container">
           <Alert alert={alert} />
-          <Routes>
-            <Route exact path="/" element={<Home showAlert={showAlert} />} />
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/login" element={<Login showAlert={showAlert} />} />
-            <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/" render={(props) => <Home {...props} showAlert={showAlert} />} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/login" render={(props) => <Login {...props} showAlert={showAlert} />} />
+            <Route exact path="/signup" render={(props) => <Signup {...props} showAlert={showAlert} />} />
+          </Switch>
         </div>
       </Router>
     </NoteState>

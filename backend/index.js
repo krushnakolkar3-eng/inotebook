@@ -17,6 +17,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Home route (so Render shows a message)
+app.get('/', (req, res) => res.send('Backend is running'));
+
 // Available Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));

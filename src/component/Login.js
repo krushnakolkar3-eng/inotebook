@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    const history = useHistory();
     const host = "http://localhost:5000";
 
     const handleSubmit = async (e) => {
@@ -21,7 +21,7 @@ const Login = (props) => {
             if (json.authtoken) {
                 localStorage.setItem('token', json.authtoken);
                 props.showAlert("Logged in successfully", "success");
-                navigate("/");
+                history.push("/");
             } else {
                 props.showAlert(json.error || "Invalid credentials", "danger");
             }
@@ -31,9 +31,9 @@ const Login = (props) => {
             setLoading(false);
         }
     };
-
-    const onChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
+   
+const onChange = (e) => {
+     setCredentials({ ...credentials, [e.target.name]: e.target.value })
     };
 
     return (
